@@ -1,0 +1,13 @@
+1. given a bookmarks.html from browser export / backup.
+
+ggrep -P '<A(?:\s[^>]*)?>\K.*?(?=</A>)' bookmarks_1_23_21.html > linksFromBookmarks.htmp
+
+This yields an html part, in this cast just all the link tags, with potentially other cruft
+
+2. remove all the <DT> leading tags, just use vim find and replace with blank space
+
+3. Next using vim add in using recording the leading and trailing li tags
+
+4. make the entire list area is a clickable link, use the block style on the a elements
+
+5. Added padding to <a> element, removed padding from the <li>
