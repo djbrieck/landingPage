@@ -1,42 +1,81 @@
 <div class="container">
-  <h1>The Landing Page</h1>
-
-  <div class="row">
-    <div class="col-8">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search your bookmarks and the web" aria-label="Search" aria-describedby="basic-addon1">
-      </div>
+    <div class="container">
+        <p class="display-6 text-center"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+              <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          The Landing Page
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+              <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
+      </p>
     </div>
-    <div class="col-4">
+  <nav>
+    <div class="container">
+      <div class="row py-3">
+        <div class="col">
+         
+          <button type="button" class="btn btn-primary"> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+              </svg> 
+            Add Bookmark
+          </button>
+        </div>
+        <div class="col">
           <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Settings
-              </button>
+            <button class="btn btn-secondary dropdown-toggle float-end" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Settings
+            </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Import Bookmarks</a></li>
-              <li><a class="dropdown-item" href="#">Export Bookmarks</a></li>
-              <li><a class="dropdown-item" href="#">Set search engine</a></li>
+              <li><a class="dropdown-item disabled" href="#">Import Bookmarks</a></li>
+              <li><a class="dropdown-item disabled" href="#">Set search engine</a></li>
+              <li><a class="dropdown-item disabled" href="#">Export Bookmarks</a></li>
+              <li><a class="dropdown-item disabled" href="#">Back up all ...</a></li>
+              <li><a class="dropdown-item disabled" href="#">Restore all ...</a></li>
+              <li><a class="dropdown-item disabled" href="#">Reset... </a></li>
+              <li><a class="dropdown-item disabled" href="#">Value 4 Value</a></li>
+              <li><a class="dropdown-item disabled" href="#">Help</a></li>
             </ul>
           </div>
+          </div>
+      </div>
 
-    </div>
-  </div>
+      <div class="row">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search bookmarks and the web" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-success" type="button" id="button-addon2">Go</button>
+          </div>
+      </div>
+       
 
-
-
+      </div>  
+  </nav>
 
 
   <div class="list-group">
-    <a href="https://wttr.in/" class="list-group-item list-group-item-action" aria-current="true">
-    Local Weather 
-    </a>
-    <a href="https://curiocaster.com/" class="list-group-item list-group-item-action">Curio Caster</a>
+    <a href="https://forecast.weather.gov/MapClick.php?lat=45.21083500000003&lon=-117.86549999999994" class="list-group-item list-group-item-action">Union Weather, NOAA</a>
     <a href="https://www.keybr.com/profile" class="list-group-item list-group-item-action">Keybr</a>
-    <a href="https://play.pocketcasts.com/podcasts" class="list-group-item list-group-item-action">Pocket Casts</a>
-    <a href="https://www.flexjobs.com/members" class="list-group-item list-group-item-action">FlexJobs</a>
-    <a href="https://forecast.weather.gov/MapClick.php?lat=45.21083500000003&lon=-117.86549999999994" class="list-group-item list-group-item-action">Weather</a>
-    <a href="https://www.theepochtimes.com/" class="list-group-item list-group-item-action">Epoch Times</a>   
+    <a href="https://mail.proton.me" class="list-group-item list-group-item-action">Proton Mail</a>
+    <a href="https://web.podfriend.com" class="list-group-item list-group-item-action">PodFriend</a>
+    <a href="https://www.udemy.com/home/my-courses/learning" class="list-group-item list-group-item-action">Udemy</a>
+    <a href="https://player.siriusxm.com/home/foryou" class="list-group-item list-group-item-action">SiriusXM</a>
+    <a href="https://app.plex.tv/" class="list-group-item list-group-item-action">Plex</a>
+    <a href="https://www.theepochtimes.com" class="list-group-item list-group-item-action">Epoch Times</a>   
+    <a href="https://noagendasocial.com" class="list-group-item list-group-item-action">No Agenda Social : mastodon</a>   
     <a href="https://permies.com/forums" class="list-group-item list-group-item-action">Permies</a>
+    <a href="https://play.pocketcasts.com/podcasts" class="list-group-item list-group-item-action">Pocket Casts</a>
+    <a href="https://curiocaster.com" class="list-group-item list-group-item-action">Curio Caster</a>
+    <a href="https://livefree.academy" class="list-group-item list-group-item-action">Life Free Academy</a>
+    <a href="https://www.thesurvivalpodcast.com" class="list-group-item list-group-item-action">The Survival Podcast with Jack Spirko</a>
+    <a href="https://www.noagendashow.net" class="list-group-item list-group-item-action">No Agenda Show</a>
+    <a href="https://wttr.in" class="list-group-item list-group-item-action" aria-current="true"> Local Weather wttr.in</a>
+    <a href="https://nextdoor.com" class="list-group-item list-group-item-action" aria-current="true">Next Door</a>
+    <a href="https://www.facebook.com" class="list-group-item list-group-item-action" aria-current="true">Facebook</a>
+    <a href="https://www.linkedin.com" class="list-group-item list-group-item-action" aria-current="true">LinkedIn</a>
+    <a href="https://twitter.com" class="list-group-item list-group-item-action" aria-current="true">Twitter</a>
   </div>
 </div>
 
