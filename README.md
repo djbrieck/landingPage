@@ -1,4 +1,9 @@
-# LangingPage
+# LandingPage
+
+The dynamically sorted landing page of all your favorite bookmarks sorted most clicked to least clicked.
+
+Import your bookmarks and set your browser home button or new tab start page to this.
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.4.
 
