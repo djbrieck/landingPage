@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Bookmarks } from './mock-bookmarks';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'The-Landing-Page';
+  bookmarks = Bookmarks;
 }
