@@ -1,6 +1,6 @@
 # LandingPage
 
-The dynamically sorted landing page of all your favorite bookmarks sorted most clicked to least clicked.
+The dynamically sorted landing page of all your favorite bookmarks sorted by your most clicked to least clicked.
 
 Import your bookmarks and set your browser home button or new tab start page to this.
 
