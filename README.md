@@ -1,13 +1,32 @@
-# LandingPage
+# LandingPage Angular proof of concept
 
-The dynamically sorted landing page of all your favorite bookmarks sorted by your most clicked to least clicked.
+This demo landing page shows a static list of all your favorite bookmarks, see [mock-bookmarks.ts](src/app/mock-bookmarks.ts) to set up which bookmarks will display. This is a proof of concept for testing using this page for storing bookmarks on a full page. I have been using this since July 6, 2022 on all my computer as a manual way to set a custom start page on each of my computers.
 
-Import your bookmarks and set your browser home button or new tab start page to this.
+- Add Bookmarks button is non functional.
 
+- Settings menu is just a place holder.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.4.
+- Search bar does not work
 
-## Development server
+- Drop down menu on each bookmark is also just a place holder and does not do anything more than pass through to the underling link
+
+- Links as set up and named in the [mock-bookmarks.ts](src/app/mock-bookmarks.ts) should work as expected taking you to the link clicked on replacing the landing page with what was clicked on.
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.4, and has been upgraded to 15.1.0.
+
+## Development server environmental setup
+
+0. Install [nvm](https://github.com/nvm-sh/nvm) if not already installed.
+
+1. Install Node 18.x.x LTS
+
+        nvm use lts/hydrogen
+
+2. Install Angular CLI if not installed already.
+    
+        npm install -g @angular/cli@15.1.0
+
+## run the app
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
