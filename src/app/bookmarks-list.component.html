@@ -1,0 +1,20 @@
+<div class="bookmarks-list">
+@for (b of sortedBookmarks; track b.id) {
+    <div class="bookmark-item">
+        <div class="bookmark-link" (click)="onLinkClick(b)">
+            <span class="title">{{ b.title }}</span>
+            <span class="url">{{ b.url }}</span>
+            <span class="count">({{ b.clickCount }})</span>
+        </div>
+        <div class="dropdown" (click)="$event.stopPropagation()">
+            <button (click)="openDropdown(b.id)">⋮</button>
+            @if (dropdownOpen() === b.id) {
+                <div class="dropdown-menu">
+                    <button (click)="editBookmark(b)">Edit</button>
+                    <button (click)="deleteBookmark(b.id)">Delete</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+</div>

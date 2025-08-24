@@ -1,0 +1,23 @@
+.add-link {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.add-link input {
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+.add-link button {
+  padding: 0.5em 1.5em;
+  border-radius: 6px;
+  border: none;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+}
+.add-link button:hover {
+  background: #3730a3;
+}

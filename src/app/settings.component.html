@@ -1,0 +1,19 @@
+<div class="settings">
+  <h2>Settings</h2>
+  <label>
+    Search Engine Name:
+    <input type="text" [(ngModel)]="searchEngine" />
+  </label>
+  <label>
+    Search Engine URL (use <code>?q=</code> for query):
+    <input type="text" [(ngModel)]="favoriteSearchUrl" />
+  </label>
+  <button (click)="saveSettings()">Save</button>
+
+  <h3>Import/Export</h3>
+  <button (click)="exportJson()">Export as JSON</button>
+  <input type="file" accept="application/json" (change)="importFromJson($event)" />
+  <br />
+  <input type="file" accept="text/html" (change)="importFromHtml($event)" />
+  <span>Import browser bookmarks HTML</span>
+</div>
