@@ -5,6 +5,6 @@
     <button (click)="showSettings = !showSettings">⚙️</button>
   </div>
   <add-link *ngIf="showAdd" (added)="showAdd = false"></add-link>
-  <bookmarks-list [filter]="filter"></bookmarks-list>
   <settings-page *ngIf="showSettings"></settings-page>
+  <bookmarks-list [filter]="filter"></bookmarks-list>
 </div>
