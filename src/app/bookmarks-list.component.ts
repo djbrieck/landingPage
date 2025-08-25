@@ -35,6 +35,6 @@ export class BookmarksListComponent {
 
   onLinkClick(b: Bookmark) {
     this.bookmarksService.incrementClick(b.id);
-    window.open(b.url, '_blank');
+    window.open(b.url, '_self');
   }
 }
