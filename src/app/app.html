@@ -1,10 +1,10 @@
 <div style="max-width: 700px; margin: 2rem auto; padding: 1rem; background: #f9f9f9; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
   <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-    <search-bar (search)="filter = $event"></search-bar>
+  <search-bar (search)="filter = $event" (navigateResults)="bookmarksList.onNavigateResults($event)"></search-bar>
     <button style="margin-left: auto;" (click)="showAdd = !showAdd">Add Link</button>
     <button (click)="showSettings = !showSettings">⚙️</button>
   </div>
   <add-link *ngIf="showAdd" (added)="showAdd = false"></add-link>
   <settings-page *ngIf="showSettings"></settings-page>
-  <bookmarks-list [filter]="filter"></bookmarks-list>
+  <bookmarks-list #bookmarksList [filter]="filter"></bookmarks-list>
 </div>

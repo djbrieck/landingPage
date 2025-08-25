@@ -12,6 +12,35 @@ import { Bookmark } from './models';
   imports: [FormsModule, CommonModule]
 })
 export class BookmarksListComponent {
+  focusedIndex = signal<number>(-1);
+
+  onNavigateResults(direction: 'up' | 'down') {
+    const bookmarks = this.sortedBookmarks;
+    if (!bookmarks.length) return;
+    let idx = this.focusedIndex();
+    if (direction === 'down') {
+      idx = idx < bookmarks.length - 1 ? idx + 1 : 0;
+    } else {
+      idx = idx > 0 ? idx - 1 : bookmarks.length - 1;
+    }
+    this.focusedIndex.set(idx);
+    setTimeout(() => {
+      const el = document.getElementById('bookmark-item-' + bookmarks[idx].id);
+      if (el) el.focus();
+    }, 0);
+  }
+
+  onResultKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      const idx = this.focusedIndex();
+      const bookmarks = this.sortedBookmarks;
+      if (idx >= 0 && idx < bookmarks.length) {
+        this.onLinkClick(bookmarks[idx]);
+      }
+    }
+  }
+
+  // ...existing code...
   @Input() filter = '';
   dropdownOpen = signal<string | null>(null);
   editingBookmark = signal<Bookmark | null>(null);

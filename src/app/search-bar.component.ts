@@ -12,6 +12,16 @@ import { FormsModule } from '@angular/forms';
 export class SearchBarComponent {
   query = '';
   @Output() search = new EventEmitter<string>();
+  @Output() navigateResults = new EventEmitter<'up' | 'down'>();
+  onSearchKeydown(event: KeyboardEvent, input: HTMLInputElement) {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.navigateResults.emit('down');
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.navigateResults.emit('up');
+    }
+  }
 
   constructor(public bookmarksService: BookmarksService) {}
 
