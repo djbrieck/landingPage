@@ -1,4 +1,6 @@
 import { Component, Input, signal } from '@angular/core';
+
+// ...existing code...
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BookmarksService } from './bookmarks.service';
@@ -13,11 +15,50 @@ import { Bookmark } from './models';
 })
 export class BookmarksListComponent {
   focusedIndex = signal<number>(-1);
+  // ...existing code...
+  constructor(public bookmarksService: BookmarksService) {}
+
+  onBookmarkKeydown(event: KeyboardEvent, i: number) {
+  const bookmarks = this.sortedBookmarks;
+  let idx = this.focusedIndex();
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      let nextIdx = 0;
+      if (idx !== -1) {
+        nextIdx = idx < bookmarks.length - 1 ? idx + 1 : 0;
+      }
+      this.focusedIndex.set(nextIdx);
+      setTimeout(() => {
+        const el = document.getElementById('bookmark-item-' + bookmarks[nextIdx].id);
+        if (el) el.focus();
+      }, 0);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      let prevIdx;
+      if (idx === -1) {
+        prevIdx = bookmarks.length - 1;
+      } else {
+        prevIdx = idx > 0 ? idx - 1 : bookmarks.length - 1;
+      }
+      this.focusedIndex.set(prevIdx);
+      setTimeout(() => {
+        const el = document.getElementById('bookmark-item-' + bookmarks[prevIdx].id);
+        if (el) el.focus();
+      }, 0);
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      if (idx >= 0 && idx < bookmarks.length) {
+        this.onLinkClick(bookmarks[idx]);
+      }
+    }
+  }
 
   onNavigateResults(direction: 'up' | 'down') {
-    const bookmarks = this.sortedBookmarks;
+    const bookmarks = this.filter ? this.sortedBookmarks : this.bookmarksService.bookmarks();
     if (!bookmarks.length) return;
     let idx = this.focusedIndex();
+    // Clamp index to valid range
+    if (idx < 0 || idx >= bookmarks.length) idx = -1;
     if (direction === 'down') {
       idx = idx < bookmarks.length - 1 ? idx + 1 : 0;
     } else {
@@ -25,15 +66,17 @@ export class BookmarksListComponent {
     }
     this.focusedIndex.set(idx);
     setTimeout(() => {
-      const el = document.getElementById('bookmark-item-' + bookmarks[idx].id);
-      if (el) el.focus();
+      if (idx >= 0 && idx < bookmarks.length) {
+        const el = document.getElementById('bookmark-item-' + bookmarks[idx].id);
+        if (el) el.focus();
+      }
     }, 0);
   }
 
   onResultKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       const idx = this.focusedIndex();
-      const bookmarks = this.sortedBookmarks;
+      const bookmarks = this.filter ? this.sortedBookmarks : this.bookmarksService.bookmarks();
       if (idx >= 0 && idx < bookmarks.length) {
         this.onLinkClick(bookmarks[idx]);
       }
@@ -41,7 +84,22 @@ export class BookmarksListComponent {
   }
 
   // ...existing code...
-  @Input() filter = '';
+  private _filter = '';
+  @Input() set filter(val: string) {
+    this._filter = val;
+    localStorage.setItem('bookmarkFilter', val);
+    this.focusedIndex.set(-1);
+  }
+  get filter() {
+    return this._filter;
+  }
+
+  ngOnInit() {
+    const savedFilter = localStorage.getItem('bookmarkFilter');
+    if (savedFilter !== null) {
+      this._filter = savedFilter;
+    }
+  }
   dropdownOpen = signal<string | null>(null);
   editingBookmark = signal<Bookmark | null>(null);
   editTitle = signal('');
@@ -73,7 +131,6 @@ export class BookmarksListComponent {
     return Object.keys(errors).length === 0;
   }
 
-  constructor(public bookmarksService: BookmarksService) {}
 
   get sortedBookmarks(): Bookmark[] {
     return this.bookmarksService.bookmarks()
