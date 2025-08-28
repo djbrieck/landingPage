@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule]
 })
 export class SettingsComponent {
+  get totalBookmarks(): number {
+    return this.bookmarksService.bookmarks().length;
+  }
   searchEngine = '';
   favoriteSearchUrl = '';
   importJson = '';
