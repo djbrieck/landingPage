@@ -26,7 +26,15 @@ export class SearchBarComponent {
   constructor(public bookmarksService: BookmarksService) {}
 
   onInput() {
+    localStorage.setItem('bookmarkFilter', this.query);
     this.search.emit(this.query);
+  }
+  ngOnInit() {
+    const savedQuery = localStorage.getItem('bookmarkFilter');
+    if (savedQuery !== null) {
+      this.query = savedQuery;
+      this.search.emit(this.query);
+    }
   }
 
   onEnter() {
