@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BookmarksService } from './bookmarks.service';
 import { FormsModule } from '@angular/forms';
 
@@ -7,9 +8,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   standalone: true,
-  imports: [FormsModule]
+  imports: [FormsModule, CommonModule]
 })
 export class SearchBarComponent {
+  clearSearch() {
+    this.query = '';
+    localStorage.setItem('bookmarkFilter', '');
+    this.search.emit(this.query);
+  }
   query = '';
   @Output() search = new EventEmitter<string>();
   @Output() navigateResults = new EventEmitter<'up' | 'down'>();

@@ -1,3 +1,4 @@
-<div class="search-bar">
+<div class="search-bar" style="display: flex; align-items: center; gap: 0.5em;">
   <input type="text" [(ngModel)]="query" (input)="onInput()" (keyup.enter)="onEnter()" placeholder="Search bookmarks..." #searchInput autofocus (keydown)="onSearchKeydown($event, searchInput)" />
+  <button *ngIf="query" type="button" (click)="clearSearch()" style="padding: 0.3em 0.7em; font-size: 1em;">✕</button>
 </div>
