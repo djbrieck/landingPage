@@ -5,8 +5,8 @@ import { Bookmark, Settings } from './models';
 export class BookmarksService {
   bookmarks = signal<Bookmark[]>([]);
   settings = signal<Settings>({
-    searchEngine: 'Google',
-    favoriteSearchUrl: 'https://www.google.com/search?q=',
+    searchEngine: 'Duck Duck Go',
+    favoriteSearchUrl: 'https://duckduckgo.com/?q=',
   });
 
   constructor() {
