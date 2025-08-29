@@ -1,6 +1,6 @@
 <div class="bookmarks-list">
 @for (b of sortedBookmarks; let i = $index; track b.id) {
-    <div class="bookmark-item" id="bookmark-item-{{b.id}}" tabindex="0" [class.focused]="focusedIndex() === i" (keydown)="onBookmarkKeydown($event, i)">
+    <div class="bookmark-item" id="bookmark-item-{{b.id}}" tabindex="0" [class.focused]="focusedIndex() === i" (keydown)="onBookmarkKeydown($event, i)" (click)="onLinkClick(b)">
         @if (editingBookmark()?.id === b.id) {
             <form class="edit-form" (submit)="$event.preventDefault(); saveEdit();">
                 <input type="text" [value]="editTitle()" #titleInput (input)="setEditTitle(titleInput.value)" name="title" placeholder="Title" required />
@@ -11,7 +11,7 @@
                 <button type="button" (click)="cancelEdit()">Cancel</button>
             </form>
         } @else {
-            <div class="bookmark-link" (click)="onLinkClick(b)">
+            <div class="bookmark-link">
                 <span class="title">{{ b.title }}</span>
             </div>
             <div class="dropdown" (click)="$event.stopPropagation()">
