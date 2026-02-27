@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The Landing Page</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="top-left">
+        <h1>The Landing Page</h1>
+      </div>
+      <div class="search-container">
+        <input id="searchInput" placeholder="Search links or press Enter to search web" autocomplete="off" spellcheck="false" />
+        <button id="clearBtn" class="clear-btn">✕</button>
+      </div>
+      <div class="top-right">
+        <button id="addBtn">Add Link</button>
+        <button id="settingsBtn">Settings</button>
+      </div>
+    </header>
+
+    <main>
+      <ul id="linksList" class="links-list"></ul>
+      <div id="empty" class="empty">No links yet. Add one!</div>
+    </main>
+
+    <!-- Add / Edit Modal -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modalTitle">Add Link</h2>
+        <form id="linkForm">
+          <label>Title</label>
+          <input id="titleInput" required />
+          <label>URL</label>
+          <input id="urlInput" type="url" required />
+          <div class="modal-actions">
+            <button type="submit">Save</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Settings</h2>
+        
+        <div class="settings-section">
+          <h3>Search Engine</h3>
+          <label>Default search engine (use %s for query)</label>
+          <input id="searchEngineInput" placeholder="https://www.google.com/search?q=%s" />
+          <p class="help-text">When no local matches found, pressing Enter will use this engine.</p>
+        </div>
+
+        <div class="settings-section">
+          <h3>Display</h3>
+          <label><input type="checkbox" id="showCountsInput" /> Show click counts</label>
+          <label><input type="checkbox" id="darkModeInput" /> Dark theme</label>
+          <div class="help-text">Total bookmarks: <span id="linkCount">0</span></div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Import / Export Links</h3>
+          <label>Import JSON file</label>
+          <input id="importJsonInput" type="file" accept="application/json" />
+          <button id="exportJsonBtn">Export JSON</button>
+
+          <h3 style="margin-top:16px">Import Browser Bookmarks</h3>
+          <label>Import .html bookmarks file</label>
+          <input id="importBookmarksInput" type="file" accept="text/html" />
+        </div>
+
+        <div class="modal-actions">
+          <button id="saveSettingsBtn">Save Settings</button>
+          <button id="closeSettingsBtn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
