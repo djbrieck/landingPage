@@ -72,7 +72,7 @@ function render(list=links){
   const sorted = sortLinks(list)
   currentDisplayList = sorted
   linksList.innerHTML = ''
-  if(sorted.length===0){ emptyEl.style.display='block'; selectedIndex = -1; return }
+  if(sorted.length===0 && links.length===0){ emptyEl.style.display='block'; selectedIndex = -1; return }
   emptyEl.style.display='none'
   for(let idx=0; idx<sorted.length; idx++){
     const item = sorted[idx]
@@ -181,7 +181,7 @@ searchInput.addEventListener('keydown',(e)=>{
 
 function performSearch(allowRedirect=false){ const q = searchInput.value.trim(); if(!q){ render(); return }
   const filtered = links.filter(l=> (l.title||'').toLowerCase().includes(q.toLowerCase()) || (l.url||'').toLowerCase().includes(q.toLowerCase()))
-  if(filtered.length>0){ render(filtered) } else if(allowRedirect){ const engine = settings.searchEngine || 'https://www.google.com/search?q=%s'; const url = engine.replace('%s', encodeURIComponent(q)); window.open(url,'_blank') } else { render([]) }
+  if(filtered.length>0){ render(filtered) } else if(allowRedirect){ const engine = settings.searchEngine ; const url = engine.replace('%s', encodeURIComponent(q)); window.open(url,'_blank') } else { render([]) }
 }
 
 addBtn.addEventListener('click', openAdd)
