@@ -12,7 +12,12 @@
         <h1>The Landing Page</h1>
       </div>
       <div class="search-container">
-        <input id="searchInput" placeholder="Search links or press Enter to search web" autocomplete="off" spellcheck="false" />
+        <input
+          id="searchInput"
+          placeholder="Search links or press Enter to search web"
+          autocomplete="off"
+          spellcheck="false"
+        />
         <button id="clearBtn" class="clear-btn">✕</button>
       </div>
       <div class="top-right">
@@ -24,7 +29,9 @@
     <main>
       <ul id="linksList" class="links-list"></ul>
       <div id="empty" class="empty">No links yet. Add one!</div>
-      <div id="noResults" class="no-results">No bookmarks match your search. Press Enter to search the internet.</div>
+      <div id="noResults" class="no-results">
+        No bookmarks match your search. Press Enter to search the internet.
+      </div>
     </main>
 
     <!-- Add / Edit Modal -->
@@ -48,19 +55,29 @@
     <div id="settingsModal" class="modal hidden">
       <div class="modal-content">
         <h2>Settings</h2>
-        
+
         <div class="settings-section">
           <h3>Search Engine</h3>
           <label>Default search engine (use %s for query)</label>
-          <input id="searchEngineInput" placeholder="https://www.google.com/search?q=%s" />
-          <p class="help-text">When no local matches found, pressing Enter will use this engine.</p>
+          <input
+            id="searchEngineInput"
+            placeholder="https://www.google.com/search?q=%s"
+          />
+          <p class="help-text">
+            When no local matches found, pressing Enter will use this engine.
+          </p>
         </div>
 
         <div class="settings-section">
           <h3>Display</h3>
-          <label><input type="checkbox" id="showCountsInput" /> Show click counts</label>
+          <label
+            ><input type="checkbox" id="showCountsInput" /> Show click
+            counts</label
+          >
           <label><input type="checkbox" id="darkModeInput" /> Dark theme</label>
-          <div class="help-text">Total bookmarks: <span id="linkCount">0</span></div>
+          <div class="help-text">
+            Total bookmarks: <span id="linkCount">0</span>
+          </div>
         </div>
 
         <div class="settings-section">
@@ -69,7 +86,7 @@
           <input id="importJsonInput" type="file" accept="application/json" />
           <button id="exportJsonBtn">Export JSON</button>
 
-          <h3 style="margin-top:16px">Import Browser Bookmarks</h3>
+          <h3 style="margin-top: 16px">Import Browser Bookmarks</h3>
           <label>Import .html bookmarks file</label>
           <input id="importBookmarksInput" type="file" accept="text/html" />
         </div>
