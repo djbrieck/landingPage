@@ -4,6 +4,7 @@ const SETTINGS_KEY = 'linkhub_settings_v1'
 // DOM
 const linksList = document.getElementById('linksList')
 const emptyEl = document.getElementById('empty')
+const noResultsEl = document.getElementById('noResults')
 const searchInput = document.getElementById('searchInput')
 const clearBtn = document.getElementById('clearBtn')
 const addBtn = document.getElementById('addBtn')
@@ -72,8 +73,22 @@ function render(list=links){
   const sorted = sortLinks(list)
   currentDisplayList = sorted
   linksList.innerHTML = ''
-  if(sorted.length===0 && links.length===0){ emptyEl.style.display='block'; selectedIndex = -1; return }
+
   emptyEl.style.display='none'
+  noResultsEl.style.display='none'
+
+  if(links.length===0)
+    { emptyEl.style.display='block'; 
+      selectedIndex = -1; 
+      return 
+    }else
+    {
+      if(sorted.length===0)
+        { noResultsEl.style.display='block';
+          return 
+        }
+    }
+  
   for(let idx=0; idx<sorted.length; idx++){
     const item = sorted[idx]
     const li = document.createElement('li')
