@@ -350,12 +350,22 @@ settingsBtn.addEventListener("click", () => {
 closeSettingsBtn.addEventListener("click", () =>
   settingsModal.classList.add("hidden"),
 );
+
 saveSettingsBtn.addEventListener("click", () => {
+  // apply changes
   settings.searchEngine = searchEngineInput.value || settings.searchEngine;
-  settings.showCounts = showCountsInput.checked;
-  settings.darkMode = darkModeInput.checked;
+  settings.showCounts    = showCountsInput.checked;
+  settings.darkMode      = darkModeInput.checked;
   applyTheme();
+
+  // refresh theme / count display immediately
+  updateLinkCount();   // updates the “Total bookmarks: …” text
+  render();            // re‑renders the whole list (needed for UI consistency)
+
+  // persist to storage
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+
+  // close modal
   settingsModal.classList.add("hidden");
 });
 
