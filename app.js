@@ -356,12 +356,11 @@ saveSettingsBtn.addEventListener("click", () => {
   settings.searchEngine = searchEngineInput.value || settings.searchEngine;
   settings.showCounts    = showCountsInput.checked;
   settings.darkMode      = darkModeInput.checked;
-  applyTheme();
 
   // refresh theme / count display immediately
   updateLinkCount();   // updates the “Total bookmarks: …” text
   render();            // re‑renders the whole list (needed for UI consistency)
-
+  applyTheme();        // immediately apply/remove theme based on new setting
   // persist to storage
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
 
