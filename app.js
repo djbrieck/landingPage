@@ -319,14 +319,14 @@ function performSearch(allowRedirect = false) {
       (l.title || "").toLowerCase().includes(q.toLowerCase()) ||
       (l.url || "").toLowerCase().includes(q.toLowerCase()),
   );
-  if (filtered.length > 0) {
-    render(filtered);
-  } else if (allowRedirect) {
+  
+  // Allways render matches for UI
+  render(filtered);
+
+  if (allowRedirect) {
     const engine = settings.searchEngine;
     const url = engine.replace("%s", encodeURIComponent(q));
     window.open(url, "_blank");
-  } else {
-    render([]);
   }
 }
 
