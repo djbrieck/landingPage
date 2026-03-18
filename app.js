@@ -137,7 +137,8 @@ function render(list = links) {
     if (settings.showCounts) {
       count = document.createElement("span");
       count.className = "count";
-      count.textContent = `Clicks: ${item.clicks || 0}`;
+      count.textContent = `${item.clicks || 0}`; //showing click count if enabled in settings
+      count.title = `Clicked ${item.clicks || 0} times.`; // show click counts and info on hover
     }
     const menuBtn = document.createElement("button");
     menuBtn.className = "menu-btn";
