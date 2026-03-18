@@ -15,7 +15,7 @@ echo "Attempting to add selected files to IPFS cluster..."
 
 # Use ipfs-cluster-ctl to add the selected files with their paths
 # This will create a directory structure under the root
-PUBLIC_HASH=$(ipfs-cluster-ctl add "${SELECTED_FILES[@]}" --name "Landing Page" -Q)
+PUBLIC_HASH=$(ipfs-cluster-ctl add "${SELECTED_FILES[@]}" --name "Landing Page" --metadata type=website -Q)
 
 if [ $? -ne 0 ]; then
     echo "Add to IPFS Cluster failed!"
