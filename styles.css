@@ -299,3 +299,38 @@ body.dark .link-item.selected {
     font-size: 16px;
   }
 }
+
+/* Add this at the end of the existing styles.css */
+.bottom-link {
+  margin-top: 30px;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.bottom-link a {
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.bottom-link a:hover {
+  background: var(--card);
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Dark theme variant */
+body.dark .bottom-link a {
+  color: var(--text);
+}
+
+body.dark .bottom-link a:hover {
+  background: var(--card);
+  color: var(--accent);
+}
