@@ -307,6 +307,15 @@ searchInput.addEventListener("keydown", (e) => {
     }
   }
 });
+searchInput.addEventListener("focusin", () => {
+  // Clear selection state
+  selectedIndex = -1;
+    // Find and remove 'selected' class from any element that has it
+  document.querySelectorAll(".link-item.selected").forEach(el => {
+    el.classList.remove("selected");
+  });
+  
+});
 
 function performSearch(allowRedirect = false) {
   const q = searchInput.value.trim();
@@ -450,6 +459,13 @@ render();
 function applyTheme() {
   if (settings.darkMode) document.body.classList.add("dark");
   else document.body.classList.remove("dark");
+
+  //Clear link selection when focus moves to search input
+  searchInput.addEventListener("focus", () => {
+    selectedIndex = -1;
+    render(currentDisplayList);
+  });
+
 }
 
 function updateLinkCount() {
