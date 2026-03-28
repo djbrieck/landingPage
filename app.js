@@ -45,7 +45,8 @@ function load() {
     links = [];
   }
   try {
-    settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || settings;
+    const stored = localStorage.getItem(SETTINGS_KEY);
+    if (stored !== null) settings = JSON.parse(stored);
   } catch (e) {}
 }
 
@@ -234,20 +235,35 @@ function deleteLink(id) {
   render();
 }
 
+function getFilteredList() {
+  const q = searchInput.value.trim();
+  if (!q) return sortLinks(links);
+  return sortLinks(links.filter(
+    (l) =>
+      (l.title || "").toLowerCase().includes(q.toLowerCase()) ||
+      (l.url || "").toLowerCase().includes(q.toLowerCase()),
+  ));
+}
+
 function selectFirstLink() {
-  if (currentDisplayList.length > 0) {
+  const list = getFilteredList();
+  if (list.length > 0) {
     selectedIndex = 0;
-    render(currentDisplayList);
+    render(list);
   }
 }
 
 function moveSelection(direction) {
-  if (currentDisplayList.length === 0) return;
-  selectedIndex = Math.max(
-    0,
-    Math.min(selectedIndex + direction, currentDisplayList.length - 1),
-  );
-  render(currentDisplayList);
+  const list = getFilteredList();
+  if (list.length === 0) return;
+  if (direction === -1 && selectedIndex <= 0) {
+    selectedIndex = -1;
+    render(list);
+    searchInput.focus();
+    return;
+  }
+  selectedIndex = Math.max(0, Math.min(selectedIndex + direction, list.length - 1));
+  render(list);
 }
 
 clearBtn.addEventListener("click", () => {
@@ -279,47 +295,54 @@ searchInput.addEventListener("input", () => {
   selectedIndex = -1;
   performSearch(false);
 });
-// Some browsers or paste/autocomplete may not trigger input consistently; add extra hooks
-searchInput.addEventListener("keyup", (e) => {
+// Arrow key navigation on document so it works even when searchInput is blurred
+document.addEventListener("keydown", (e) => {
+  if (selectedIndex < 0 && document.activeElement !== searchInput) return;
   if (e.key === "ArrowDown") {
     e.preventDefault();
-    if (selectedIndex < 0) selectFirstLink();
-    else moveSelection(1);
+    if (selectedIndex < 0) {
+      if (getFilteredList().length === 0) return;
+      selectFirstLink();
+      searchInput.blur();
+    } else {
+      moveSelection(1);
+    }
   } else if (e.key === "ArrowUp") {
     e.preventDefault();
     moveSelection(-1);
-  } else if (e.key !== "Enter") {
-    selectedIndex = -1;
-    performSearch(false);
+  } else if (e.key === "Enter" && selectedIndex >= 0) {
+    e.preventDefault();
+    const item = currentDisplayList[selectedIndex];
+    if (item) {
+      item.clicks = (item.clicks || 0) + 1;
+      if (!save()) alert("Click count could not be saved; storage may be full.");
+      window.location.href = item.url;
+    }
+  }
+});
+
+// Arrow key navigation (keyup so it doesn't conflict with keydown Enter handler)
+searchInput.addEventListener("keyup", (e) => {
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    e.preventDefault();
   }
 });
 searchInput.addEventListener("paste", () => {
   selectedIndex = -1;
   setTimeout(() => performSearch(false), 20);
 });
-// Enter runs search: if there are matches it will show them, otherwise it will redirect
+// Enter on searchInput with no selection triggers web search
 searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    if (selectedIndex >= 0 && currentDisplayList.length > selectedIndex) {
-      const item = currentDisplayList[selectedIndex];
-      item.clicks = (item.clicks || 0) + 1;
-      if (!save())
-        alert("Click count could not be saved; storage may be full.");
-      window.location.href = item.url;
-    } else {
+    if (selectedIndex < 0) {
       performSearch(true);
     }
   }
 });
 searchInput.addEventListener("focusin", () => {
-  // Clear selection state
   selectedIndex = -1;
-    // Find and remove 'selected' class from any element that has it
-  document.querySelectorAll(".link-item.selected").forEach(el => {
-    el.classList.remove("selected");
-  });
-  
+  render(getFilteredList());
 });
 
 function performSearch(allowRedirect = false) {
@@ -408,6 +431,7 @@ importJsonInput.addEventListener("change", (ev) => {
         }
         save();
         render();
+        updateLinkCount();
         alert("Imported JSON successfully");
       } else alert("JSON must be an array of link objects");
     } catch (e) {
@@ -443,6 +467,7 @@ importBookmarksInput.addEventListener("change", (ev) => {
     }
     save();
     render();
+    updateLinkCount();
     alert(`Imported ${added} bookmarks`);
   };
   reader.readAsText(f);
@@ -476,11 +501,7 @@ function applyTheme() {
   else document.body.classList.remove("dark");
 }
 
-// Clear link selection when focus moves to search input
-searchInput.addEventListener("focus", () => {
-  selectedIndex = -1;
-  render(currentDisplayList);
-});
+
 
 function updateLinkCount() {
   if (linkCountDisplay) linkCountDisplay.textContent = links.length;
