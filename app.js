@@ -203,6 +203,10 @@ linkForm.addEventListener("submit", (e) => {
   const t = titleInput.value.trim();
   let u = urlInput.value.trim();
   if (!u.match(/^https?:\/\//)) u = "https://" + u;
+  try { new URL(u); } catch (_) {
+    alert("Please enter a valid URL.");
+    return;
+  }
   if (editingId) {
     const idx = links.findIndex((x) => x.id === editingId);
     if (idx > -1) {
@@ -452,6 +456,7 @@ window.addEventListener("pageshow", (e) => {
   if (e.persisted) {
     // back button - reload data but keep search filter
     load();
+    applyTheme();
     performSearch(false);
   } else {
     // fresh load (new tab/window) - reset completely
@@ -469,14 +474,13 @@ render();
 function applyTheme() {
   if (settings.darkMode) document.body.classList.add("dark");
   else document.body.classList.remove("dark");
-
-  //Clear link selection when focus moves to search input
-  searchInput.addEventListener("focus", () => {
-    selectedIndex = -1;
-    render(currentDisplayList);
-  });
-
 }
+
+// Clear link selection when focus moves to search input
+searchInput.addEventListener("focus", () => {
+  selectedIndex = -1;
+  render(currentDisplayList);
+});
 
 function updateLinkCount() {
   if (linkCountDisplay) linkCountDisplay.textContent = links.length;

@@ -36,7 +36,7 @@
 
     <!-- Add this link at the bottom of the body tag -->
 <div class="bottom-link" style="margin-top: 30px; text-align: center;">
-  <a href="#" title="Return to the top of the Landing Page">
+  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" title="Return to the top of the Landing Page">
     The end of the Landing Page has been reached.
   </a>
 </div>
@@ -49,7 +49,7 @@
           <label>Title</label>
           <input id="titleInput" required />
           <label>URL</label>
-          <input id="urlInput" type="url" required />
+          <input id="urlInput" required />
           <div class="modal-actions">
             <button type="submit">Save</button>
             <button type="button" id="cancelBtn">Cancel</button>
