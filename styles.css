@@ -188,8 +188,8 @@ body.dark .link-item.selected {
 }
 .menu {
   position: absolute;
-  right: 0;
-  top: 36px;
+  top: 8px;
+  right: 4px;
   background: var(--card);
   border: 1px solid var(--muted);
   border-radius: 8px;
@@ -334,21 +334,3 @@ body.dark .bottom-link a:hover {
   background: var(--card);
   color: var(--accent);
 }
-/* 1️⃣ Remove any stray margin/padding from the inner buttons */
-.menu button {
-    background: transparent;          /* no background colour */
-    border: none;                     /* no border */
-    padding: 6px 8px;                 /* just enough to be tappable */
-    cursor: pointer;
-}
-
-/* 2️⃣ Ensure the menu itself doesn’t have a gap around its content */
-.menu {
-    position: absolute;
-    top: 8px;          /* slight offset from the link‑item height */
-    right: 4px;        /* small inset so it stays inside the UI */
-    min-width: 0;      /* important – prevents layout shift when closed */
-}
-
-/* When the menu is open we just make it visible (no extra transform needed) */
-.menu.show { display: block; }

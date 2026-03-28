@@ -123,7 +123,6 @@ function render(list = links) {
     main.className = "link-main";
     const title = document.createElement("div");
     title.className = "link-title";
-    title.title = item.title;
     title.textContent = item.title;
     const url = document.createElement("div");
     url.className = "link-url";
@@ -357,7 +356,7 @@ function performSearch(allowRedirect = false) {
       (l.url || "").toLowerCase().includes(q.toLowerCase()),
   );
   
-  // Allways render matches for UI
+  // Always render matches for UI
   render(filtered);
 
   if (allowRedirect) {
@@ -473,9 +472,6 @@ importBookmarksInput.addEventListener("change", (ev) => {
   reader.readAsText(f);
 });
 
-// initial demo data if empty
-function seedIfEmpty() {}
-
 // ensure page resets properly on back button
 window.addEventListener("pageshow", (e) => {
   if (e.persisted) {
@@ -493,7 +489,6 @@ window.addEventListener("pageshow", (e) => {
 
 load();
 applyTheme();
-seedIfEmpty();
 render();
 
 function applyTheme() {
